@@ -14,6 +14,8 @@ short_description: An open model sorts your brain dump in your browser.
 
 A small chore deserves a small model. Paste one note per line, get suggested shelves, correct anything that looks wrong, then download a Markdown list.
 
+[Open the Render demo](https://sloth-inbox.onrender.com/) · [GitHub source](https://github.com/panditshivam/sloth-inbox) · [Validation workflow](https://github.com/panditshivam/sloth-inbox/actions/workflows/validate.yml)
+
 Built from scratch on 22 October 2026 for the Hacktoberfest Week 3 “Slow and Steady” challenge. This is a new project, not a pull request to an existing one.
 
 ## Try it
