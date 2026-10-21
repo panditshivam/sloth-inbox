@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { parseInput, parseShelves, rankNotes, toMarkdown } from './core.mjs';
+assert.throws(() => parseInput('  '), /at least/);
+assert.throws(() => parseInput(Array(61).fill('note').join('\n')), /60/);
+assert.throws(() => parseInput('x'.repeat(301)), /300/);
+assert.deepEqual(parseInput('  alpha\n\n beta '), ['alpha', 'beta']);
+assert.throws(() => parseShelves('Same: one\nsame: two'), /different/);
+assert.throws(() => parseShelves('Only one'), /2–8/);
+const shelves = parseShelves('Fix: broken code\nRead: books and papers');
+const rows = rankNotes(['a bug', 'unclear'], shelves, [[1,0],[0.7,0.7],[1,0],[0,1]]);
+assert.equal(rows[0].shelf, 0);
+assert.equal(rows[1].shelf, -1);
+assert.equal(rows[1].review, true);
+rows[1].shelf = 1;
+assert.match(toMarkdown(rows, shelves), /## Read\n\n- unclear/);
+assert.doesNotMatch(toMarkdown(rows, shelves), /Needs review/);
+console.log('10 checks passed: input bounds, shelf validation, ranking, ambiguity review and corrected export.');

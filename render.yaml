@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: sloth-inbox
+    runtime: static
+    buildCommand: node check.mjs && node build.mjs
+    staticPublishPath: dist
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: SKIP_INSTALL_DEPS
+        value: 'true'

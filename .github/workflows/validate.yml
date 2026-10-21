@@ -1,0 +1,35 @@
+name: Validate Sloth Inbox
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      HF_HOME: ${{ runner.temp }}/sloth-model-cache
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Check input handling, ranking and corrected export
+        run: npm test
+      - name: Run the pinned open model on synthetic regression fixtures
+        run: npm run verify:model
+      - name: Build the public frontend
+        run: npm run build
+      - name: Save inference receipt and deployable frontend
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: verified-static-app
+          path: |
+            dist/
+            model-check.json
+          retention-days: 7

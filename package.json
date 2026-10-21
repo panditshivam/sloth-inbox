@@ -1,0 +1,14 @@
+{
+  "name": "sloth-inbox",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node check.mjs",
+    "build": "node build.mjs",
+    "verify:model": "node model-check.mjs"
+  },
+  "devDependencies": {
+    "@huggingface/transformers": "3.8.1"
+  }
+}

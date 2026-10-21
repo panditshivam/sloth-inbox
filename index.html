@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Turn a messy brain dump into a tidy list. Open-model sorting in your browser, with a human review step.">
+  <title>Sloth Inbox — a little less sorting</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><a class="brand" href="./">sloth inbox<span class="brand-dot">●</span></a><span class="badge">SMALL MODEL. SMALL CHORE.</span></header>
+<main>
+  <section class="intro">
+    <div><p class="eyebrow">FOR THE “I’LL ORGANIZE IT LATER” PILE</p><h1>Your brain dump.<br>A little more <em>sorted.</em></h1>
+    <p class="lede">Drop your loose notes here. A small open model suggests a shelf for each one. You get the final say.</p>
+    <div class="promises"><span>↗ Runs in your browser</span><span>↗ No account or API key</span><span>↗ Your words stay on this device</span></div></div>
+    <aside class="sloth-card" aria-label="Take the slow lane"><svg viewBox="0 0 220 180" role="img" aria-label="Original illustration of a relaxed sloth hanging from a branch"><path d="M18 38 Q105 21 204 41" stroke="#53634b" stroke-width="12" fill="none" stroke-linecap="round"/><path d="M74 40 Q40 124 114 138 Q178 139 153 42" stroke="#b8a38b" stroke-width="27" fill="none" stroke-linecap="round"/><ellipse cx="112" cy="95" rx="54" ry="43" fill="#b8a38b"/><ellipse cx="112" cy="94" rx="43" ry="34" fill="#f7eddb"/><ellipse cx="92" cy="91" rx="17" ry="11" fill="#756351" transform="rotate(25 92 91)"/><ellipse cx="132" cy="91" rx="17" ry="11" fill="#756351" transform="rotate(-25 132 91)"/><path d="M85 91q7 7 14 0m26 0q7 7 14 0" fill="none" stroke="#292e25" stroke-width="3" stroke-linecap="round"/><ellipse cx="112" cy="104" rx="6" ry="4" fill="#292e25"/><path d="M102 115q10 8 20 0" fill="none" stroke="#756351" stroke-width="3" stroke-linecap="round"/></svg><span>Less dragging things around.<br>More hanging around.</span></aside>
+  </section>
+  <section class="workspace" aria-label="Sort your notes">
+    <div class="input-panel"><div class="section-head"><h2><span>01</span> Unload the pile</h2><button id="example" class="text-button">Try an example</button></div>
+    <label for="notes">One note per line <small>Up to 60 notes · 300 characters each</small></label>
+    <textarea id="notes" rows="10" placeholder="Patch the broken login redirect&#10;Read the paper about attention&#10;Pick up oat milk on the way home" spellcheck="false"></textarea>
+    <details><summary>Choose your shelves</summary><label for="shelves">One shelf per line: name: description</label>
+    <textarea id="shelves" rows="5" spellcheck="false">Fix: bugs, broken software, errors, debugging and repairs
+Read: articles, papers, books, documentation and things to learn
+Buy: groceries, shopping, supplies and things to purchase
+Life: personal chores, appointments, exercise and household errands</textarea>
+    <p class="hint">Describe what belongs there. This model matches meaning; it doesn’t follow instructions or understand deadlines.</p></details>
+    <div class="actions"><button id="sort" class="primary">Sort my inbox <span>↗</span></button><button id="clear" class="text-button">Clear</button></div>
+    <p id="status" role="status" aria-live="polite">Ready when you are. The model loads on the first sort.</p></div>
+    <div class="result-panel"><div class="section-head"><h2><span>02</span> Give it a once-over</h2><span id="count" class="count">YOUR CALL</span></div>
+    <div id="empty"><span class="empty-mark">≋</span><h3>A place for the loose ends.</h3><p>Your sorted notes land here.<br>Uncertain matches get a “Needs review” label.</p></div>
+    <div id="results" hidden></div>
+    <div id="export-actions" hidden><div class="export-actions"><button id="download" class="secondary">Download Markdown ↓</button><button id="copy" class="text-button">Copy list</button></div><details><summary>Preview Markdown</summary><label for="markdown">Your exported list</label><textarea id="markdown" rows="8" readonly></textarea></details></div>
+    </div>
+  </section>
+  <section class="fineprint"><p><strong>A shelf suggestion, not a decision.</strong> English works best. Similarity scores are not probabilities. Short, ambiguous, negated or mixed-topic notes may land on the wrong shelf; review before using the list. Inputs are kept in memory and cleared on reload.</p><p><strong>How it stays local.</strong> MiniLM embeddings run through Transformers.js and WebAssembly in a worker. The app downloads code and model files from jsDelivr and Hugging Face; those hosts receive normal download requests. Note text is never sent to an inference server. Internet is needed for the initial downloads and to reopen this hosted page.</p></section>
+</main><footer><span>Made for the slow lane. Hacktoberfest 2026.</span><a href="https://huggingface.co/Xenova/all-MiniLM-L6-v2" target="_blank" rel="noopener">The open model ↗</a></footer>
+<script type="module" src="app.mjs"></script>
+</body></html>
